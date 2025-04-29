@@ -1,9 +1,10 @@
-# Booking API Logic
+# Defines API endpoints (Booking API Logic)
 # Includes JWT protection and exposes GET /bookings/<booking_id>
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
 from models import db, Booking
 
+# Blueprint lets us organize routes into modular files.
 bp = Blueprint("booking_bp", __name__)
 
 
@@ -50,3 +51,16 @@ def get_booking_by_id(booking_id):
     if not booking:
         return jsonify({"error": "Booking not found"}), 404
     return jsonify(booking.to_dict())
+
+# return all active bookings
+@bp.route('/active-bookings', methods=['GET'])
+def active_bookings():
+    bookings = Booking.query.all()
+    result = []
+    for booking in bookings:
+        result.append({
+            "booking_id": booking.id,
+            "user_id": booking.user_id,
+            "driver_id": booking.driver_id
+        })
+    return jsonify(result)

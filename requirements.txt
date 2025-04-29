@@ -1,5 +1,6 @@
-flask #handles HTTP routes
-flask_sqlalchemy #ORM for DB modeling
-flask_jwt_extended #ready for JWT-secured endpoints
-psycopg2-binary #PostgreSQL connector
-python-dotenv #loads .env config
+# App packages
+flask # handles HTTP routes
+flask_sqlalchemy # ORM for DB modeling
+flask_jwt_extended # ready for JWT-secured endpoints
+psycopg2-binary # PostgreSQL connector
+python-dotenv # loads .env config

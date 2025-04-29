@@ -1,8 +1,10 @@
-from sqlalchemy import ForeignKey
+# Database schema using ORM (Object-relational mapping)
 from flask_sqlalchemy import SQLAlchemy
 
+# sets up ORM engine
 db = SQLAlchemy()
 
+# The Booking class maps to a PostgreSQL table called drivers
 class Booking(db.Model):
     __tablename__ = 'bookings'
 
