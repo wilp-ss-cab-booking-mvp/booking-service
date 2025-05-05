@@ -1,14 +1,16 @@
 import pika
 import json
-from config import RABBITMQ_HOST, RABBITMQ_QUEUE
+from config import RABBITMQ_HOST, RABBITMQ_QUEUE, RABBITMQ_USER, RABBITMQ_PASS 
 import logging
 
 logging.basicConfig(level=logging.INFO)
 
 def send_booking_notification(data):
     try:
+        credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASS)
+        parameters = pika.ConnectionParameters(host=RABBITMQ_HOST, credentials=credentials)
         #Connects to RabbitMQ.
-        connection = pika.BlockingConnection(pika.ConnectionParameters(host=RABBITMQ_HOST))
+        connection = pika.BlockingConnection(parameters)
         channel = connection.channel()
         channel.queue_declare(queue=RABBITMQ_QUEUE)
 
